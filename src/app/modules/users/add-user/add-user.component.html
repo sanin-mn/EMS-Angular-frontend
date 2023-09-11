@@ -1,0 +1,50 @@
+<div class="d-flex border border-light">
+    <div style="width: 200px; height: 90vh;" class="sidebar bg-info p-3 d-flex flex-column">
+        <a routerLink="/home">Home</a>
+        <a routerLink="/users">Users</a>
+    </div>
+    <div class="dashboard p-3 w-50">
+        <div class="title">
+            <h1>add new user</h1>
+        </div>
+        <div class="user-details mt-3 shadow border rounded p-3 w-75">
+            <form #addUserForm="ngForm">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputid" placeholder="User Id" required pattern="[0-9]*"
+                    #id="ngModel" name="id" [(ngModel)]="user.id">
+                    <label for="floatingInputid">user id</label>
+                </div>
+                <!-- invalid id -->
+                <div *ngIf="id.invalid && id.touched" class="mb-3 text-danger "> *Invalid Id</div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputname" placeholder="User Name"
+                    required pattern="[a-z A-Z ]*"
+                    #id="ngModel" name="name" [(ngModel)]="user.name">
+                    <label for="floatingInputname">user name</label>
+                </div>
+                
+                <div class="form-floating mb-3 ">
+                    <input type="email" class="form-control" id="floatingInputemail" placeholder="E mail" required email
+                    #id="ngModel" name="email" [(ngModel)]="user.email">
+                    <label for="floatingInputemail">email</label>
+                </div>
+                
+                <!-- dropdown -->
+                <div class="form-floating">
+                   <select  required #id="ngModel" name="active" [(ngModel)]="user.active"
+                    id="floatingInputstatus" class="form-control">
+                    <option disabled selected  hidden value=""></option>
+                    <option value="1">Active</option>
+                    <option value="0">InActive</option>
+                   </select>
+                   <label for="floatingInputstatus">status</label>
+                </div>
+                <!-- button -->
+                <div class="mt-3">
+                    <button  class="btn btn-warning">Cancel</button>
+                    <button [disabled]="addUserForm.invalid" (click)="addUser()" class="btn btn-success ms-5">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
